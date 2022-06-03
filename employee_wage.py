@@ -1,34 +1,49 @@
 """
     @Author: SADANAND PANDEY
-    @Date: 2022-06-02 19:25:00
+    @Date: 2022-06-02 19:40:00
     @Last Modified by: SADANAND PANDEY
-    @Last Modified time: 2022-06-02 19:30:00
-    @Title : Add Part time Employee & calculate Wage
+    @Last Modified time: 2022-06-02 19:50:00
+    @Title : Calculating Wages for a Month
 """
 import random
 
 
 class Employee:
+    def __init__(self, wage_per_hr, full_time, part_time):
+        self.wage_per_hr = wage_per_hr
+        self.full_time = full_time
+        self.part_time = part_time
+
     @staticmethod
-    def check_attendance():
-        wage_per_hr = 20
-        emp_Hrs = 0
-
-        is_present = (random.randint(0, 2))
+    def employee_attendance():
+        is_present = random.randint(0, 2)
         if is_present == 2:
-            print("Employee is present Part Time")
-            emp_Hrs = 4
+            emp_hrs = 4
         elif is_present == 1:
-            print("Employee is present Full Time")
-            emp_Hrs = 8
+            emp_hrs = 8
         else:
-            print("Employee is Absent")
+            emp_hrs = 0
+        return emp_hrs
 
-        daily_wage = wage_per_hr * emp_Hrs
-        print("Daily Wage :", daily_wage)
+    def calculate_wage(self):
+        monthly_wage = 0
+        for day in range(1, 21):
+            print("\nDay : ", day)
+            emp_Hrs = Employee.employee_attendance()
+
+            # calculating daily wage for an employee
+            daily_wage = self.wage_per_hr * emp_Hrs
+
+            # calculating monthly wage for an employee
+            monthly_wage = monthly_wage + daily_wage
+            print("Daily Wage :", daily_wage)
+        return monthly_wage
 
 
 if __name__ == '__main__':
     print("Welcome To Employee Wage Management System !!\n")
-    print()
-    Employee.check_attendance()
+    employee = Employee(wage_per_hr=20, full_time=8, part_time=4)
+    monthly_wage = employee.calculate_wage()
+    print("\n------------------------------------")
+    print("Monthly wage of an employee: ",monthly_wage)
+    print("--------------------------------------")
