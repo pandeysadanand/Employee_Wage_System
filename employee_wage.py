@@ -117,7 +117,6 @@ def display_company():
 
 
 def reg_employee():
-    wage = []
     try:
         company_name = input("Enter company name to add employee : ")
         com_obj = company_dict.get(company_name.upper())
